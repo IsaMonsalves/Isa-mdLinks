@@ -3,14 +3,7 @@
 ## Índice
 
 - [1. Resumen del proyecto](#1-resumen-del-proyecto)
-- [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-- [4. Consideraciones generales](#4-consideraciones-generales)
-- [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
-- [6. Entregables](#6-entregables)
-- [7. Hacker edition](#7-hacker-edition)
-- [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
-- [9. Checklist](#9-checklist)
-- [10. Achicando el problema](#10-achicando-el-problema)
+
 
 ---
 
@@ -46,9 +39,9 @@ Este proyecto proporciona una manera eficiente de mantener actualizados los enla
 
 ### Creación del Proyecto:
 
-La idea inicial recibida para la creación del proyecto fue una librería que permitiera analizar el estado de links presentes en archivos \*.md\_ \*Para esto se dibujó un diagrama de flujo que considerara los pasos y la lógica a seguir al ejecutar estos comandos aplicados tanto a archivos como directorios, generando recursividad en la función.
+La idea inicial recibida para la creación del proyecto fue una librería que permitiera analizar el estado de links presentes en archivos **.md** Para esto se dibujó un diagrama de flujo que considerara los pasos y la lógica a seguir al ejecutar estos comandos aplicados tanto a archivos como directorios, generando recursividad en la función.
 
-En esta primera versión del proyecto de MDLinks se decidió presentar un proyecto corto en que la lógica aplicada sea la que está basada exlusivamente en los archivos, se espera poder actualizar prontamente esta versión para poder aplicar su lógica en directorios que puedan ser recorridos en búsqueda de archivos _.md_ para analizar sus respectivos links y poder aplicar la recursividad.
+En esta primera versión del proyecto de MDLinks se decidió presentar un proyecto corto en que la lógica aplicada sea la que está basada exlusivamente en los archivos, se espera poder actualizar prontamente esta versión para poder aplicar su lógica en directorios que puedan ser recorridos en búsqueda de archivos **.md** para analizar sus respectivos links y poder aplicar la recursividad.
 
 ![](https://i.postimg.cc/50Shg79q/Diagrama-sin-t-tulo.jpg)
 
@@ -68,11 +61,11 @@ Se ejecutó el comando npm init en la terminal para iniciar un nuevo proyecto No
 
 ### Instalación de Dependencias y creación de arhivos:
 
-Para poder ejecutar la lógica del proyecto se instalaron algunas librerías/ frameworks, en este caso el motor principal fie _axios_ ya que es la librería que nos permite hacer la llamada de https para analizar cada uno de los links.
+Para poder ejecutar la lógica del proyecto se instalaron algunas librerías/ frameworks, en este caso el motor principal fie *axios* ya que es la librería que nos permite hacer la llamada de https para analizar cada uno de los links.
 
-Se creó un archivo JS principal llamado _index.js_ en el que se incluyó toda la lógica del proyecto, incluida la importanción de bibliotecas y luego se llamó la funcionalidad a través de un archivo llamado _cli.js_.
+Se creó un archivo JS principal llamado **index.js** en el que se incluyó toda la lógica del proyecto, incluida la importanción de bibliotecas y luego se llamó la funcionalidad a través de un archivo llamado **cli.js**.
 
-Además se creó un archivo _functions.js_ en el que se replicó la lógica desglosada en funciones aisladas para el posterior testeo.
+Además se creó un archivo **functions.js** en el que se replicó la lógica desglosada en funciones aisladas para el posterior testeo.
 
 Es importante destacar que se aplicó programación asíncrona (promesas) para realizar solicitudes HTTP a cada enlace utilizando Axios.
 
@@ -85,10 +78,32 @@ Es importante destacar que se aplicó programación asíncrona (promesas) para r
 ##### Comandos:
 
 Para interactuar con la aplicación sed debe abrir la terminal del sistema y ejecutar el siguiente comando:
+###### mdLinks "ruta del archivo"
 
+Si se aplica el comando de un archivo sin opciones, se identificará si es una ruta existente y si este es un archivo **.md** y de ser así el caso se analizará en busca de links para arrojar los siguientes valores: 
+- File (archivo del que se obtuvo el Link)
+- Href (Link)
+- Text (Titulo del Link)
+- 
+
+
+
+> ![](https://i.postimg.cc/XYKt41dM/Captura-de-pantalla-2023-08-09-172538.png)
+
+> Respuesta al indicar una ruta que no existe
+
+> ![]([https://i.postimg.cc/XYKt41dM/Captura-de-pantalla-2023-08-09-172538.png](https://i.postimg.cc/0NNCjJJX/Captura-de-pantalla-2023-08-11-153711.png))
+
+![](https://i.postimg.cc/6QhDJRxH/Captura-de-pantalla-2023-08-11-154746.png)
+
+> Respuesta al indicar una ruta que si existe Y no contiene archivos .md
+> ![]([https://i.postimg.cc/XYKt41dM/Captura-de-pantalla-2023-08-09-172538.png](https://i.postimg.cc/0NNCjJJX/Captura-de-pantalla-2023-08-11-153711.png))
+
+![](https://i.postimg.cc/W4XKJD5X/Captura-de-pantalla-2023-08-09-172013.png)
+> Respuesta al indicar una ruta que si existe Y contiene archivos .md, pero sin opciones
 ###### mdLinks "ruta del archivo" --validate
 
-El comando _validate_ analizará el archivo en búsqueda de Links, los cuales serán almacenados para posteriormente hacer el llamado HTTPS para analizar su estado.
+El comando **validate** analizará el archivo en búsqueda de Links, los cuales serán almacenados para posteriormente hacer el llamado HTTPS para analizar su estado.
 Finalmente se devolverá un objeto en la terminal que indique las siguientes propiedades:
 
 - File (archivo del que se obtuvo el Link)
@@ -99,20 +114,30 @@ Finalmente se devolverá un objeto en la terminal que indique las siguientes pro
 
 ![](https://i.postimg.cc/W4XKJD5X/Captura-de-pantalla-2023-08-09-172013.png)
 
-> Representación de la apariencia de la terminal al ejecutar el comando --Validate
+> Representación de la apariencia de la terminal al ejecutar la ocpión --Validate
 
 ###### mdLinks "ruta del archivo" --stats
 
-El commando _stats_ devuelve estadísticas con respecto al total de Links en el archivo.
+El commando **stats** devuelve estadísticas con respecto al total de Links en el archivo.
 Estas son :
 
 - Total (total de Links encontrados y analizados)
 - Unique ( total de Links únicos)
+
+![](https://i.postimg.cc/KzrCbTXq/Captura-de-pantalla-2023-08-11-153546.png)
+
+  > Representación de la apariencia de la terminal al ejecutar la opción --stats
+##### Ejecución de stats y validate juntos
+En este caso se retornará una estadística extra a la funcionalidad de stats que es la cantidad de links inoperantes.
+
+- Total (total de Links encontrados y analizados)
+- Unique ( total de Links únicos)
 - Broken ( Total de Links que no se encuentran operativos)
-  ![](https://i.postimg.cc/vmQkB7t4/Captura-de-pantalla-2023-08-09-172029.png)
-  > Representación de la apariencia de la terminal al ejecutar el comando --Validate
+- 
 
-##### Errores
+![](https://i.postimg.cc/pX2Rm2q5/Captura-de-pantalla-2023-08-11-153650.png)
 
-> ![](https://i.postimg.cc/XYKt41dM/Captura-de-pantalla-2023-08-09-172538.png)
-> Respuesta al indicar una ruta que no existe
+  Por otro lado, la funcionalidad de validate es la misma
+
+  
+  ![](https://i.postimg.cc/W4XKJD5X/Captura-de-pantalla-2023-08-09-172013.png)
