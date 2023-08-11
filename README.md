@@ -18,7 +18,7 @@
 
 El proyecto consiste en desarrollar una aplicación de línea de comandos (CLI) en JavaScript que permita analizar archivos en busca de enlaces y revisar su estado mediante solicitudes HTTP. El objetivo principal es brindar una herramienta sencilla y efectiva para verificar la validez de los enlaces presentes en archivos Markdown.
 
-## Funcionalidades principales:
+## 2. Funcionalidades principales
 
 **Análisis de archivos:** La herramienta permite al usuario proporcionar una ruta o un conjunto de rutas de archivos y directorios para ser analizados en busca de enlaces. La CLI es capaz de reconocer archivos md y extraer los enlaces contenidos en ellos.
 
@@ -42,10 +42,77 @@ El proyecto consiste en desarrollar una aplicación de línea de comandos (CLI) 
 
 Este proyecto proporciona una manera eficiente de mantener actualizados los enlaces presentes en archivos, lo que puede ser útil para asegurar la integridad y calidad de documentos, páginas web o proyectos en general.
 
+## 3. Ejecución del proyecto:
 
-https://www.laboratoria.la/
+### Creación del Proyecto:
 
-https://www.cinemark.ccl/pelicula?corporate_film_id=93835
+La idea inicial recibida para la creación del proyecto fue una librería que permitiera analizar el estado de links presentes en archivos \*.md\_ \*Para esto se dibujó un diagrama de flujo que considerara los pasos y la lógica a seguir al ejecutar estos comandos aplicados tanto a archivos como directorios, generando recursividad en la función.
 
-https://www.falabella.com/falabella-cl
+En esta primera versión del proyecto de MDLinks se decidió presentar un proyecto corto en que la lógica aplicada sea la que está basada exlusivamente en los archivos, se espera poder actualizar prontamente esta versión para poder aplicar su lógica en directorios que puedan ser recorridos en búsqueda de archivos _.md_ para analizar sus respectivos links y poder aplicar la recursividad.
 
+![](https://i.postimg.cc/50Shg79q/Diagrama-sin-t-tulo.jpg)
+
+> DIAGRAMA DE FLUJO INICIAL , INCLUYE RECURSIVIDAD
+> ![](https://i.postimg.cc/bwq3HyDM/Diagrama-sin-t-tulo-1.jpg)
+> DIAGRAMA DE FLUJO FINAL, INCLUYE SÓLO LA LÓGICA APLICADA A LA PRIMERA VERSIÓN DEL PROYECTO
+
+### Configuración del Entorno:
+
+El primer paso para dar funcionalidad al proyecto fue crear un repositorio y luego abrirlo en Visual Studio Code (VS Code), un entorno de desarrollo integrado popular, al cual se le instaló los módulosd e Node.js, previamente instalado en el sistema.
+
+Se decidió usar CommonJS y se configuró Eslint con las reglas establecidas por Airbnb.
+
+### Creación del Proyecto:
+
+Se ejecutó el comando npm init en la terminal para iniciar un nuevo proyecto Node.js. configurando el nombre ,la versión y la descripción.
+
+### Instalación de Dependencias y creación de arhivos:
+
+Para poder ejecutar la lógica del proyecto se instalaron algunas librerías/ frameworks, en este caso el motor principal fie _axios_ ya que es la librería que nos permite hacer la llamada de https para analizar cada uno de los links.
+
+Se creó un archivo JS principal llamado _index.js_ en el que se incluyó toda la lógica del proyecto, incluida la importanción de bibliotecas y luego se llamó la funcionalidad a través de un archivo llamado _cli.js_.
+
+Además se creó un archivo _functions.js_ en el que se replicó la lógica desglosada en funciones aisladas para el posterior testeo.
+
+Es importante destacar que se aplicó programación asíncrona (promesas) para realizar solicitudes HTTP a cada enlace utilizando Axios.
+
+## 4. Instrucciones de uso
+
+#### Instalación
+
+#### Interacción con la terminal
+
+##### Comandos:
+
+Para interactuar con la aplicación sed debe abrir la terminal del sistema y ejecutar el siguiente comando:
+
+###### mdLinks "ruta del archivo" --validate
+
+El comando _validate_ analizará el archivo en búsqueda de Links, los cuales serán almacenados para posteriormente hacer el llamado HTTPS para analizar su estado.
+Finalmente se devolverá un objeto en la terminal que indique las siguientes propiedades:
+
+- File (archivo del que se obtuvo el Link)
+- Href (Link)
+- Text (Titulo del Link)
+- Status (Estado del Link representado con su respectico código)
+- Ok( Según sea el caso puede retornar la palabra "OK" o "Fail" )
+
+![](https://i.postimg.cc/W4XKJD5X/Captura-de-pantalla-2023-08-09-172013.png)
+
+> Representación de la apariencia de la terminal al ejecutar el comando --Validate
+
+###### mdLinks "ruta del archivo" --stats
+
+El commando _stats_ devuelve estadísticas con respecto al total de Links en el archivo.
+Estas son :
+
+- Total (total de Links encontrados y analizados)
+- Unique ( total de Links únicos)
+- Broken ( Total de Links que no se encuentran operativos)
+  ![](https://i.postimg.cc/vmQkB7t4/Captura-de-pantalla-2023-08-09-172029.png)
+  > Representación de la apariencia de la terminal al ejecutar el comando --Validate
+
+##### Errores
+
+> ![](https://i.postimg.cc/XYKt41dM/Captura-de-pantalla-2023-08-09-172538.png)
+> Respuesta al indicar una ruta que no existe
